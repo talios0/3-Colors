@@ -27,7 +27,7 @@ public class Hover : MonoBehaviour
     private void GetGroundY() {
         RaycastHit2D rayHit = Physics2D.Raycast(transform.position, Vector2.down);
         float groundY = rayHit.transform.position.y + rayHit.transform.localScale.y/2;
-        relativeGroundY = transform.position.y - groundY;
+        relativeGroundY = transform.position.y - transform.localScale.y/2 - groundY;
     }
 
     private void AddHoverForce() {
