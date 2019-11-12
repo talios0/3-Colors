@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 94232564}
   - component: {fileID: 94232566}
   - component: {fileID: 94232562}
+  - component: {fileID: 94232567}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -271,7 +272,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   distanceToStartJump: 1.5
-  maxJumpTime: 30
+  maxJumpTime: 10
   jumpForce: 30
 --- !u!70 &94232566
 CapsuleCollider2D:
@@ -289,6 +290,20 @@ CapsuleCollider2D:
   m_Offset: {x: -0.26, y: -1.02}
   m_Size: {x: 1.91, y: 3.13}
   m_Direction: 0
+--- !u!114 &94232567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 94232559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d664d03e81f389498fbe55d46eecec8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxValue: 5
+  changeAmount: 0.25
 --- !u!1 &169708222
 GameObject:
   m_ObjectHideFlags: 0
@@ -498,6 +513,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420030}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -513,6 +529,25 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
+--- !u!114 &519420030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 071be89ba5d22bf4a860367660f06409, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 94232561}
+  tracker: {fileID: 94232567}
+  xOffset: 5
+  yOffset: 0
+  incrementTime: 0.05
+  shiftValue: 4.6
+  shiftMin: 3.8
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0

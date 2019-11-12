@@ -40,8 +40,12 @@ public class Movement : MonoBehaviour
 
     void Move()
     {
-        if (input.x == -1) GetComponent<SpriteRenderer>().flipX = true;
-        if (input.x == 1) GetComponent<SpriteRenderer>().flipX = false;
+        if (input.x == -1)  {
+            GetComponent<SpriteRenderer>().flipX = true;
+        }
+        if (input.x == 1) {
+            GetComponent<SpriteRenderer>().flipX = false;
+        }
         if (input.x != 0) rb.AddForce(input.x * speed * Vector2.right);
         else if (rb.velocity.x != 0)
         {
@@ -50,8 +54,6 @@ public class Movement : MonoBehaviour
             else rb.AddForce(speed / 4 * Vector2.right);
         }
     }
-
-
 
     void InitiateJump()
     {
