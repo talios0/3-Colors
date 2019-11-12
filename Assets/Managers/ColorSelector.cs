@@ -55,6 +55,10 @@ public class ColorSelector : MonoBehaviour
     }
 
     private void UpdatePanel() {
+        if (Input.GetButton("Submit Color")) {
+            colorShiftPanelActive = false;
+        }
+
         int index = (int) selectedColor;
         if (!Input.GetButtonDown("Horizontal")) return;
         if (Input.GetAxisRaw("Horizontal") == -1) {
@@ -64,5 +68,10 @@ public class ColorSelector : MonoBehaviour
             index = index + 1 > colors.Length - 1 ? 0 : index + 1;
         }
         selectedColor = (Colors) index;
+
+    }
+
+    public bool isActive() {
+        return colorShiftPanelActive;
     }
 }

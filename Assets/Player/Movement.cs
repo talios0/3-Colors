@@ -15,13 +15,17 @@ public class Movement : MonoBehaviour
     private Vector3 input;
     private Rigidbody2D rb;
 
+    private ColorSelector colorSelector;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        colorSelector = GameObject.Find("Color Selector").GetComponent<ColorSelector>();
     }
 
     void FixedUpdate()
     {
+        if (colorSelector.isActive()) return;
         GetInput();
         Move();
         Jump();
