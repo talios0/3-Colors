@@ -31,7 +31,6 @@ public class Hover : MonoBehaviour
     }
 
     private void AddHoverForce() {
-
         if (movement.GetInput().y != 0 && movement.GetJump()) return;
         float force = (maxDistance - relativeGroundY) / (maxDistance - minDistance);
         if (force < 0) return;

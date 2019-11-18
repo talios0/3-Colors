@@ -10,6 +10,7 @@ public class CameraFollow : MonoBehaviour
 
     public float xOffset;
     public float yOffset;
+    public bool followY;
 
     public float incrementTime;
 
@@ -28,7 +29,7 @@ public class CameraFollow : MonoBehaviour
     }
 
     // Update is called once per frame
-    void LateUpdate()
+    void FixedUpdate()
     {
         Vector3 cameraPos = new Vector3();
         cameraPos.z = transform.position.z;
@@ -51,6 +52,8 @@ public class CameraFollow : MonoBehaviour
             }
 
         }
+
+        if (!followY) cameraPos.y = yOffset;
 
         transform.position = cameraPos;
 

@@ -9,7 +9,7 @@ public class ColorSelector : MonoBehaviour
     public GameObject[] colors;
     public Image[] highlightColors;
     private Colors selectedColor;
-    private bool colorShiftPanelActive;
+    private static bool colorShiftPanelActive;
 
     // Start is called before the first frame update
     void Start()
@@ -71,7 +71,7 @@ public class ColorSelector : MonoBehaviour
 
     }
 
-    public bool isActive() {
+    public static bool isActive() {
         return colorShiftPanelActive;
     }
 }

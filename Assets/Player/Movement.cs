@@ -25,7 +25,7 @@ public class Movement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (colorSelector.isActive()) return;
+        if (ColorSelector.isActive()) return;
         GetInput();
         Move();
         Jump();
