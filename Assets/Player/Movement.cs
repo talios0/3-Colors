@@ -12,6 +12,8 @@ public class Movement : MonoBehaviour
     private int jumpTime; // # of frames since jump has started
     private bool initiateJump = false;
 
+    private RaycastHit2D lastRayhit;
+
     private Vector3 input;
     private Rigidbody2D rb;
 
@@ -21,6 +23,7 @@ public class Movement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         colorSelector = GameObject.Find("Color Selector").GetComponent<ColorSelector>();
+        lastRayhit = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y + transform.localScale.y / 2, transform.position.z), Vector2.down);
     }
 
     void FixedUpdate()
@@ -60,6 +63,16 @@ public class Movement : MonoBehaviour
         if (input.y == 0) return;
         // RAYCAST CHECK
         RaycastHit2D rayHit = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y + transform.localScale.y / 2, transform.position.z), Vector2.down);
+        if (rayHit == new RaycastHit2D())
+        {
+            Debug.Log("NO FLOOR DETECTED!");
+            if (GetComponent<Hover>().GetGapStatus() == GapHoverState.ENDED) return;
+            rayHit = lastRayhit;
+        }
+        else {
+            lastRayhit = rayHit;
+        }
+
         if ((transform.position.y + transform.localScale.y / 2) - (rayHit.transform.position.y + rayHit.transform.localScale.y / 2) > distanceToStartJump) return;
         initiateJump = true;
     }

@@ -19,4 +19,8 @@ public class CameraTracker : MonoBehaviour
         return position;
     }
 
+    public void SetPosition(float position) {
+        this.position = position;
+    }
+
 }
