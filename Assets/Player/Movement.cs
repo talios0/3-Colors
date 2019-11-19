@@ -11,6 +11,7 @@ public class Movement : MonoBehaviour
 
     private int jumpTime; // # of frames since jump has started
     private bool initiateJump = false;
+    private JumpState jumpState;
 
     private RaycastHit2D lastRayhit;
 
@@ -60,42 +61,42 @@ public class Movement : MonoBehaviour
 
     void InitiateJump()
     {
-        if (input.y == 0) return;
+        
         // RAYCAST CHECK
         RaycastHit2D rayHit = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y + transform.localScale.y / 2, transform.position.z), Vector2.down);
         if (rayHit == new RaycastHit2D())
         {
-            Debug.Log("NO FLOOR DETECTED!");
+            if (rayHit == lastRayhit) return;
             if (GetComponent<Hover>().GetGapStatus() == GapHoverState.ENDED) return;
             rayHit = lastRayhit;
+            if (initiateJump) lastRayhit = new RaycastHit2D();
         }
         else {
             lastRayhit = rayHit;
+            jumpState= JumpState.NONE;
         }
 
+        if (input.y == 0 || jumpState == JumpState.ENDED) return;
         if ((transform.position.y + transform.localScale.y / 2) - (rayHit.transform.position.y + rayHit.transform.localScale.y / 2) > distanceToStartJump) return;
-        initiateJump = true;
+
+        jumpState = JumpState.INITIATED;
     }
 
     void Jump()
     {
-        if (!initiateJump)
-        {
-            InitiateJump();
-            return;
-        }
-        else if (jumpTime < maxJumpTime) {
+        InitiateJump();
+        if (jumpTime < maxJumpTime && jumpState == JumpState.INITIATED) {
             if (input.y != 0) rb.AddForce(jumpForce * Vector2.up);
             jumpTime++;
         }
 
         if (jumpTime >= maxJumpTime) {
-            initiateJump = false;
+            jumpState = JumpState.ENDED;
             jumpTime = 0;
         }
     }
 
-    public bool GetJump() {
-        return initiateJump;
+    public JumpState GetJump() {
+        return jumpState;
     }
 }
