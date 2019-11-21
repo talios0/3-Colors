@@ -72,7 +72,7 @@ public class Hover : MonoBehaviour
         groundY = rayHit.transform.position.y + rayHit.transform.localScale.y / 2;
         relativeGroundY = transform.position.y - transform.localScale.y / 2 - groundY;
         lastRelativeGroundY = relativeGroundY;
-        lastRayHit = rayHit;
+        if (rayHit.transform.gameObject.layer != LayerMask.NameToLayer("Dynamic")) lastRayHit = rayHit;
     }
 
 

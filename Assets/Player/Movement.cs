@@ -61,9 +61,8 @@ public class Movement : MonoBehaviour
 
     void InitiateJump()
     {
-        
         // RAYCAST CHECK
-        RaycastHit2D rayHit = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y + transform.localScale.y / 2, transform.position.z), Vector2.down);
+        RaycastHit2D rayHit = GetGround();
         if (rayHit == new RaycastHit2D())
         {
             if (rayHit == lastRayhit) return;
@@ -73,6 +72,7 @@ public class Movement : MonoBehaviour
         }
         else {
             lastRayhit = rayHit;
+            if (jumpState == JumpState.INITIATED) return;
             jumpState= JumpState.NONE;
         }
 
@@ -98,5 +98,9 @@ public class Movement : MonoBehaviour
 
     public JumpState GetJump() {
         return jumpState;
+    }
+
+    public RaycastHit2D GetGround() {
+        return Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y + transform.localScale.y / 2, transform.position.z), Vector2.down);
     }
 }
