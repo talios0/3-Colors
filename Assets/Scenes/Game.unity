@@ -200,7 +200,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 94232559}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.08, y: -1.3, z: -0.12890625}
+  m_LocalPosition: {x: -8.091, y: -0.78, z: -0.12890625}
   m_LocalScale: {x: 0.35, y: 0.35, z: 1}
   m_Children:
   - {fileID: 2067688774}
@@ -262,6 +262,7 @@ MonoBehaviour:
   gapForceMultiplier: 1.28
   gapDistanceMultiplier: 2.6086957
   gapMinDistanceMultiplier: 0.75
+  hoverEffect: {fileID: 2067688776}
   gapHoverTime: 250
   randomForce: 0.2
   randomForceWaitRange: {x: 5, y: 500}
@@ -1835,7 +1836,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2067688773}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.5, z: 0}
+  m_LocalPosition: {x: 0, y: -1.85, z: 1}
   m_LocalScale: {x: 1, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 94232561}
@@ -1882,7 +1883,7 @@ ParticleSystemRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_RenderMode: 0
-  m_SortMode: 0
+  m_SortMode: 2
   m_MinParticleSize: 0
   m_MaxParticleSize: 0.5
   m_CameraVelocityScale: 0
@@ -1913,7 +1914,7 @@ ParticleSystem:
   m_GameObject: {fileID: 2067688773}
   serializedVersion: 6
   lengthInSec: 2
-  simulationSpeed: 1
+  simulationSpeed: 0.5
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
@@ -2472,7 +2473,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 1000
+    maxNumParticles: 5
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -2737,7 +2738,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 1.75
       minScalar: 10
       maxCurve:
         serializedVersion: 2

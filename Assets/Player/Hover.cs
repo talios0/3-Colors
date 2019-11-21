@@ -10,6 +10,7 @@ public class Hover : MonoBehaviour
     public float gapForceMultiplier;
     public float gapDistanceMultiplier;
     public float gapMinDistanceMultiplier;
+    public ParticleSystem hoverEffect;
 
     public float gapHoverTime;
     private float time;
@@ -46,6 +47,11 @@ public class Hover : MonoBehaviour
         AddHoverForce();
         if (!gapDetected && gapHover == GapHoverState.ENDED) gapHover = GapHoverState.NONE;
         RandomForce();
+        if (gapHover == GapHoverState.HOVER || movement.GetJump() == JumpState.INITIATED) {
+            hoverEffect.Play();
+        } else {
+            hoverEffect.Stop();
+        }
     }
 
     private void GetGroundY()
