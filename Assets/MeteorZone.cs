@@ -9,8 +9,15 @@ public class MeteorZone : MonoBehaviour
     public float timeActive;
     private float time;
 
-    private void FixedUpdate() {
-        
+    public GameObject player;
+    public GameObject particleSpitter;
+
+    void Update() {
+        if (player.transform.position.x + player.transform.localScale.x/2 > transform.position.x - size.x/2 && player.transform.position.x - player.transform.localScale.x/2 < transform.position.x + size.x/2) {
+            if (!particleSpitter.GetComponent<ParticleSystem>().isPlaying) particleSpitter.GetComponent<ParticleSystem>().Play();
+        } else {
+            if (particleSpitter.GetComponent<ParticleSystem>().isPlaying) particleSpitter.GetComponent<ParticleSystem>().Stop();
+        }
     }
 
     private void OnDrawGizmos() {
