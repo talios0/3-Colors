@@ -12,7 +12,7 @@ public class CameraTracker : MonoBehaviour
     private float position;
 
     private void LateUpdate() {
-        if (ColorSelector.isActive()) return;
+        if (StateReciever.GetState() == States.INACTIVE) return;
         position += Input.GetAxisRaw("Horizontal") * changeAmount;
         position = Mathf.Clamp(position, -maxValue, maxValue);
     }

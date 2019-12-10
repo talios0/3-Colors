@@ -31,7 +31,6 @@ public class Movement : MonoBehaviour
     void FixedUpdate()
     {
         if (StateReciever.GetState() == States.INACTIVE) return;
-        if (ColorSelector.isActive()) return;
         GetInput();
         Move();
         Jump();

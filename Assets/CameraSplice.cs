@@ -24,11 +24,6 @@ public class CameraSplice : MonoBehaviour
     private Vector3 startPos;
 
     void Start() {
-        destinationTexture = new RenderTexture(destinationCamera.pixelWidth, destinationCamera.pixelHeight, (int) destinationCamera.depth, UnityEngine.Experimental.Rendering.DefaultFormat.HDR);
-
-        destinationCamera.targetTexture = destinationTexture;
-        material = new Material(Shader.Find("Unlit/Texture"));
-        material.SetTexture("_MainTex", destinationTexture);
 
         startPos = mask.GetComponent<RectTransform>().position;
     }

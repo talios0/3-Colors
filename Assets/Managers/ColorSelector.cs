@@ -24,11 +24,11 @@ public class ColorSelector : MonoBehaviour
             ActivateColorShiftPanel();
             OpenPanel();
         }
-        if (colorShiftPanelActive)  {UpdatePanel(); UpdateHighlight(); }
+        if (StateReciever.GetState() == States.INACTIVE)  {UpdatePanel(); UpdateHighlight(); }
     }
 
     private void ActivateColorShiftPanel() {
-        colorShiftPanelActive = true;
+        StateReciever.SetState(States.INACTIVE);
     }
 
     private void OpenPanel() {
@@ -56,7 +56,7 @@ public class ColorSelector : MonoBehaviour
 
     private void UpdatePanel() {
         if (Input.GetButton("Submit Color")) {
-            colorShiftPanelActive = false;
+            StateReciever.SetState(States.ACTIVE);
         }
 
         int index = (int) selectedColor;
@@ -69,9 +69,5 @@ public class ColorSelector : MonoBehaviour
         }
         selectedColor = (Colors) index;
 
-    }
-
-    public static bool isActive() {
-        return colorShiftPanelActive;
     }
 }
