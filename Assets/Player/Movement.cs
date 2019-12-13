@@ -23,9 +23,8 @@ public class Movement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        colorSelector = GameObject.Find("Color Selector").GetComponent<ColorSelector>();
+        //colorSelector = GameObject.Find("Color Selector").GetComponent<ColorSelector>();
         lastRayhit = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y + transform.localScale.y / 2, transform.position.z), Vector2.down);
-
     }
 
     void FixedUpdate()
