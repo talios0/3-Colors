@@ -8,7 +8,7 @@ public class ColorSelector : MonoBehaviour
 
     public GameObject[] colors;
     public Image[] highlightColors;
-    private Colors selectedColor;
+    private static Colors selectedColor;
 
     // Start is called before the first frame update
     void Start()
@@ -48,5 +48,9 @@ public class ColorSelector : MonoBehaviour
         if (index == (int)selectedColor) return;
         selectedColor = (Colors) index;
 
+    }
+
+    public static Colors GetColor() {
+        return selectedColor;
     }
 }

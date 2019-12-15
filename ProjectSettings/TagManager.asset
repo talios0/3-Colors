@@ -5,8 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Orange
-  - Blue
   - Green
+  - Blue
   layers:
   - Default
   - TransparentFX
@@ -19,8 +19,8 @@ TagManager:
   - 
   - 
   - Dynamic
-  - Interactable
-  - 
+  - PlayerAttack
+  - Player
   - 
   - 
   - 

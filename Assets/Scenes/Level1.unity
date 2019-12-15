@@ -4930,7 +4930,7 @@ GameObject:
   - component: {fileID: 514750891}
   m_Layer: 0
   m_Name: Main Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10913,13 +10913,30 @@ GameObject:
   - component: {fileID: 919473230}
   - component: {fileID: 919473229}
   - component: {fileID: 919473228}
-  m_Layer: 0
+  - component: {fileID: 919473227}
+  m_Layer: 12
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &919473227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919473226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24c0b08cdd1da25458b5415e16eddd6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reloadTime: 0
+  maxForce: 1500
+  explosionRadius: 0
+  burst: {fileID: 209565332579975833, guid: eb5c33b74c1357b4489353d20aeebc8d, type: 3}
 --- !u!114 &919473228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12539,7 +12556,7 @@ GameObject:
   - component: {fileID: 1099052588}
   - component: {fileID: 1099052586}
   - component: {fileID: 1099052587}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
