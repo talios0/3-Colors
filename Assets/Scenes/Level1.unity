@@ -10936,6 +10936,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reloadTime: 15
   maxForce: 1500
+  maxDistance: 4
   explosionRadius: 0
   burst: {fileID: 209565332579975833, guid: eb5c33b74c1357b4489353d20aeebc8d, type: 3}
 --- !u!114 &919473228

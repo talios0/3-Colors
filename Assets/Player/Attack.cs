@@ -7,6 +7,7 @@ public class Attack : MonoBehaviour
     [Header("Fire Settings")]
     public float reloadTime;
     public float maxForce;
+    public float maxDistance;
     public float explosionRadius;
 
     private AttackTracker attackTracker;
@@ -47,12 +48,12 @@ public class Attack : MonoBehaviour
         mousePos.z = 0;
         // Convert to world position
         Vector3 worldMouse = mainCamera.ScreenToWorldPoint(mousePos);
-        // Angle between center of player and mouse position
-        float angle = Mathf.Atan2(worldMouse.y - transform.position.y, worldMouse.x - transform.position.x);
 
         // Create Burst Attack
         GameObject firedShot = Instantiate(burst);
         firedShot.transform.position = transform.position;
+
+        // Color changes
         Color color = new Color();
         Color highlightColor = new Color();
         ColorUtility.TryParseHtmlString(ColorScheme.primaryColors[(int)ColorSelector.GetColor()], out color);
@@ -60,8 +61,13 @@ public class Attack : MonoBehaviour
         firedShot.GetComponent<SpriteRenderer>().color = color;
         firedShot.transform.GetComponent<TrailRenderer>().startColor = highlightColor;
         firedShot.transform.GetComponent<TrailRenderer>().endColor = highlightColor;
-        firedShot.GetComponent<Rigidbody2D>().AddForce(new Vector2(maxForce * Mathf.Cos(angle), maxForce * Mathf.Sin(angle)));
 
+        // Force Calculations + Launch
+        float angle = Mathf.Atan2(worldMouse.y - transform.position.y, worldMouse.x - transform.position.x);
+        //float distance = Mathf.Sqrt(Mathf.Pow(worldMouse.x - transform.position.x, 2) + Mathf.Pow(worldMouse.y - transform.position.y, 2));
+        firedShot.GetComponent<Rigidbody2D>().AddForce(new Vector2(maxForce * Mathf.Cos(angle) * Mathf.Clamp(Mathf.Abs(worldMouse.x - transform.position.x)/maxDistance, 0, 1), maxForce * Mathf.Sin(angle) * Mathf.Clamp(Mathf.Abs(worldMouse.y - transform.position.y)/maxDistance,0,1)));
+
+        // Resets player to Reload atttack state
         attackTracker = AttackTracker.RELOAD;
     }
 
