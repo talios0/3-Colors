@@ -44,6 +44,13 @@ public class Attack : MonoBehaviour
         // Create Burst Attack
         GameObject firedShot = Instantiate(burst);
         firedShot.transform.position = transform.position;
+        Color color = new Color();
+        Color highlightColor = new Color();
+        ColorUtility.TryParseHtmlString(ColorScheme.primaryColors[(int)ColorSelector.GetColor()], out color);
+        ColorUtility.TryParseHtmlString(ColorScheme.highlightColors[(int)ColorSelector.GetColor()], out highlightColor);
+        firedShot.GetComponent<SpriteRenderer>().color = color;
+        firedShot.transform.GetComponent<TrailRenderer>().startColor = highlightColor;
+        firedShot.transform.GetComponent<TrailRenderer>().endColor = highlightColor;
         firedShot.GetComponent<Rigidbody2D>().AddForce(new Vector2(maxForce * Mathf.Cos(angle), maxForce * Mathf.Sin(angle)));
     }
 

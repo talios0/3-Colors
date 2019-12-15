@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 209565332579975832}
   - component: {fileID: 209565332579975829}
   - component: {fileID: 209565332579975830}
+  - component: {fileID: 324669801}
   m_Layer: 11
   m_Name: Burst
   m_TagString: Untagged
@@ -29,8 +30,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.157, y: 1.076, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 1}
-  m_Children:
-  - {fileID: 209565333557533375}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -121,45 +121,14 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!1 &209565333557533312
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 209565333557533375}
-  - component: {fileID: 209565333557533374}
-  m_Layer: 11
-  m_Name: Trail
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &209565333557533375
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 209565333557533312}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
-  m_Children: []
-  m_Father: {fileID: 209565332579975831}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!96 &209565333557533374
+--- !u!96 &324669801
 TrailRenderer:
   serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 209565333557533312}
+  m_GameObject: {fileID: 209565332579975833}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -171,7 +140,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 612e12597e76e144f9ee599532355e87, type: 2}
+  - {fileID: 2100000, guid: b53dcfbcdff9f554bb4947fa7de52579, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -191,7 +160,7 @@ TrailRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Time: 0.1
   m_Parameters:
     serializedVersion: 3
@@ -201,7 +170,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.12598082
+        value: 0.33857194
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -213,8 +182,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
+      key0: {r: 0, g: 0, b: 0, a: 1}
+      key1: {r: 0, g: 0, b: 0, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -237,7 +206,7 @@ TrailRenderer:
       atime5: 0
       atime6: 0
       atime7: 0
-      m_Mode: 0
+      m_Mode: 1
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 5
@@ -247,5 +216,5 @@ TrailRenderer:
     shadowBias: 0.5
     generateLightingData: 0
   m_MinVertexDistance: 0.1
-  m_Autodestruct: 0
+  m_Autodestruct: 1
   m_Emitting: 1
