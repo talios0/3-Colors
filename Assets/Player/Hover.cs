@@ -56,7 +56,7 @@ public class Hover : MonoBehaviour
 
     private void GetGroundY()
     {
-        RaycastHit2D rayHit = Physics2D.Raycast(transform.position, Vector2.down);
+        RaycastHit2D rayHit = movement.GetGround();
         float groundY;
         if (rayHit == new RaycastHit2D())
         {

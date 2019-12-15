@@ -101,6 +101,17 @@ public class Movement : MonoBehaviour
     }
 
     public RaycastHit2D GetGround() {
-        return Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y + transform.localScale.y / 2, transform.position.z), Vector2.down);
+        RaycastHit2D[] rayHits = Physics2D.RaycastAll(new Vector3(transform.position.x, transform.position.y + transform.localScale.y / 2, transform.position.z), Vector2.down, 5f);
+        RaycastHit2D ground = new RaycastHit2D();
+        foreach (RaycastHit2D obj in rayHits) {
+            if (Physics2D.GetIgnoreLayerCollision(gameObject.layer, obj.transform.gameObject.layer)) continue;
+            if (ground == default(RaycastHit2D)) {
+                ground = obj;
+                continue;
+            }
+            if (ground.transform.position.y + ground.transform.localScale.y / 2 < obj.transform.position.y + obj.transform.localScale.y / 2) ground = obj;
+        }
+
+        return ground;
     }
 }
