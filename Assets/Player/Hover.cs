@@ -118,4 +118,9 @@ public class Hover : MonoBehaviour
     public GapHoverState GetGapStatus() {
         return gapHover;
     }
+
+    public void ChangeHoverColor(Color color) {
+        ParticleSystem.MainModule main = hoverEffect.main;
+        main.startColor = color;
+    }
 }
