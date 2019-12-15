@@ -20,15 +20,24 @@ public class Attack : MonoBehaviour
 
     void Start() {
         mainCamera = Camera.main;
+        attackTracker = AttackTracker.IDLE;
     }
 
     void Update() {
         if (StateReciever.GetState() == States.INACTIVE) return;
-        if (Input.GetAxisRaw("Attack") != 0) Shoot();
+        if (attackTracker == AttackTracker.IDLE && Input.GetAxisRaw("Attack") != 0) Shoot();
     }
 
     void FixedUpdate() {
         if (StateReciever.GetState() == States.INACTIVE) return;
+        if (attackTracker == AttackTracker.RELOAD) {
+            if (reloadTracker > reloadTime)
+            {
+                reloadTracker = 0;
+                attackTracker = AttackTracker.IDLE;
+            }
+            else reloadTracker++;
+        }
     }
 
     private void Shoot() {
@@ -52,6 +61,8 @@ public class Attack : MonoBehaviour
         firedShot.transform.GetComponent<TrailRenderer>().startColor = highlightColor;
         firedShot.transform.GetComponent<TrailRenderer>().endColor = highlightColor;
         firedShot.GetComponent<Rigidbody2D>().AddForce(new Vector2(maxForce * Mathf.Cos(angle), maxForce * Mathf.Sin(angle)));
+
+        attackTracker = AttackTracker.RELOAD;
     }
 
 }

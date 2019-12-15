@@ -9419,6 +9419,7 @@ PolygonCollider2D:
       - {x: 2.26, y: -1.28}
       - {x: 0.415, y: -1.28}
       - {x: 0.415, y: -2.352}
+      - {x: 0.07, y: -2.352}
 --- !u!212 &790503091
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -10933,7 +10934,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24c0b08cdd1da25458b5415e16eddd6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reloadTime: 0
+  reloadTime: 15
   maxForce: 1500
   explosionRadius: 0
   burst: {fileID: 209565332579975833, guid: eb5c33b74c1357b4489353d20aeebc8d, type: 3}

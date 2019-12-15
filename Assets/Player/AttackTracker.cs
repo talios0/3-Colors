@@ -1,6 +1,4 @@
 ﻿public enum AttackTracker { 
-    IDLE,
-    SHOOT,
-    RELOAD,
-    DISABLED
+    IDLE = 0,
+    RELOAD = 1
 }
