@@ -9,40 +9,18 @@ public class ColorSelector : MonoBehaviour
     public GameObject[] colors;
     public Image[] highlightColors;
     private Colors selectedColor;
-    private static bool colorShiftPanelActive;
 
     // Start is called before the first frame update
     void Start()
     {
-        selectedColor = Colors.NONE;
+        selectedColor = Colors.ORANGE;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButton("Change Color") && !colorShiftPanelActive) {
-            ActivateColorShiftPanel();
-            OpenPanel();
-        }
-        if (StateReciever.GetState() == States.INACTIVE)  {UpdatePanel(); UpdateHighlight(); }
-    }
-
-    private void ActivateColorShiftPanel() {
-        StateReciever.SetState(States.INACTIVE);
-    }
-
-    private void OpenPanel() {
-        switch (selectedColor) {
-            case Colors.NONE:
-                selectedColor = Colors.ORANGE;
-                break;
-            case Colors.ORANGE:
-                break;
-            case Colors.GREEN:
-                break;
-            case Colors.BLUE:
-                break;
-        }
+        UpdatePanel();
+        UpdateHighlight();
     }
 
     private void UpdateHighlight() {
@@ -55,18 +33,19 @@ public class ColorSelector : MonoBehaviour
     }
 
     private void UpdatePanel() {
-        if (Input.GetButton("Submit Color")) {
-            StateReciever.SetState(States.ACTIVE);
-        }
-
         int index = (int) selectedColor;
-        if (!Input.GetButtonDown("Horizontal")) return;
-        if (Input.GetAxisRaw("Horizontal") == -1) {
+        if (Input.GetAxisRaw("Change Color") == -1) {
             index = index-1 < 0 ? colors.Length - 1 : index - 1;
         }
-        else if (Input.GetAxisRaw("Horizontal") == 1) {
+        else if (Input.GetAxisRaw("Change Color") == 1) {
             index = index + 1 > colors.Length - 1 ? 0 : index + 1;
         }
+
+        if (Input.GetAxisRaw("Select Orange") != 0) index = 0;
+        else if (Input.GetAxisRaw("Select Blue") != 0) index = 1;
+        else if (Input.GetAxisRaw("Select Green") != 0) index = 2;
+
+        if (index == (int)selectedColor) return;
         selectedColor = (Colors) index;
 
     }
