@@ -15,6 +15,7 @@ public class Attack : MonoBehaviour
 
     [Header("Attack")]
     public GameObject burst;
+    public BurstProperties[] burstTypes;
 
     // EXTRA
     private Camera mainCamera;
@@ -62,11 +63,20 @@ public class Attack : MonoBehaviour
         firedShot.transform.GetComponent<TrailRenderer>().startColor = highlightColor;
         firedShot.transform.GetComponent<TrailRenderer>().endColor = highlightColor;
 
+        PhysicsMaterial2D physMat = new PhysicsMaterial2D();
+        physMat.bounciness = burstTypes[(int)ColorSelector.GetColor()].bounciness;
+        physMat.friction = burstTypes[(int)ColorSelector.GetColor()].friction;
+        firedShot.GetComponent<Rigidbody2D>().sharedMaterial = physMat;
+
+        firedShot.transform.localScale = new Vector2(burstTypes[(int)ColorSelector.GetColor()].size,burstTypes[(int)ColorSelector.GetColor()].size);
+
         // Force Calculations + Launch
         float angle = Mathf.Atan2(worldMouse.y - transform.position.y, worldMouse.x - transform.position.x);
         //float distance = Mathf.Sqrt(Mathf.Pow(worldMouse.x - transform.position.x, 2) + Mathf.Pow(worldMouse.y - transform.position.y, 2));
         firedShot.GetComponent<Rigidbody2D>().AddForce(new Vector2(maxForce * Mathf.Cos(angle) * Mathf.Clamp(Mathf.Abs(worldMouse.x - transform.position.x)/maxDistance, 0, 1), maxForce * Mathf.Sin(angle) * Mathf.Clamp(Mathf.Abs(worldMouse.y - transform.position.y)/maxDistance,0,1)));
 
+
+        
         // Resets player to Reload atttack state
         attackTracker = AttackTracker.RELOAD;
     }
