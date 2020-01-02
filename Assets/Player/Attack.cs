@@ -52,23 +52,25 @@ public class Attack : MonoBehaviour
 
         // Create Burst Attack
         GameObject firedShot = Instantiate(burst);
+        int burstColor = (int)ColorSelector.GetColor();
+        firedShot.GetComponent<Explode>().burstProperties = burstTypes[burstColor];
         firedShot.transform.position = transform.position;
 
         // Color changes
         Color color = new Color();
         Color highlightColor = new Color();
-        ColorUtility.TryParseHtmlString(ColorScheme.primaryColors[(int)ColorSelector.GetColor()], out color);
-        ColorUtility.TryParseHtmlString(ColorScheme.highlightColors[(int)ColorSelector.GetColor()], out highlightColor);
+        ColorUtility.TryParseHtmlString(ColorScheme.primaryColors[burstColor], out color);
+        ColorUtility.TryParseHtmlString(ColorScheme.highlightColors[burstColor], out highlightColor);
         firedShot.GetComponent<SpriteRenderer>().color = color;
         firedShot.transform.GetComponent<TrailRenderer>().startColor = highlightColor;
         firedShot.transform.GetComponent<TrailRenderer>().endColor = highlightColor;
 
         PhysicsMaterial2D physMat = new PhysicsMaterial2D();
-        physMat.bounciness = burstTypes[(int)ColorSelector.GetColor()].bounciness;
-        physMat.friction = burstTypes[(int)ColorSelector.GetColor()].friction;
+        physMat.bounciness = burstTypes[burstColor].bounciness;
+        physMat.friction = burstTypes[burstColor].friction;
         firedShot.GetComponent<Rigidbody2D>().sharedMaterial = physMat;
 
-        firedShot.transform.localScale = new Vector2(burstTypes[(int)ColorSelector.GetColor()].size,burstTypes[(int)ColorSelector.GetColor()].size);
+        firedShot.transform.localScale = new Vector2(burstTypes[burstColor].size,burstTypes[burstColor].size);
 
         // Force Calculations + Launch
         float angle = Mathf.Atan2(worldMouse.y - transform.position.y, worldMouse.x - transform.position.x);

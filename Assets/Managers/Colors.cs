@@ -1,9 +1,9 @@
 public enum Colors {
     NONE = -1,
     ORANGE = 0,
-    GREEN = 1,
-    BLUE = 2 
-}
+    GREEN = 2,
+    BLUE = 1
+    }
 
 public static class ColorScheme {
     public readonly static string[] primaryColors = { "#FFBB00", "#00C7FF", "#A5FF00" };
