@@ -12,6 +12,9 @@ public class BurstProperties : ScriptableObject
     public float maxSplatSize;
     public float bounciness;
     public float friction;
+    public float drag;
+
+    public bool sizeOverVelocity;
 
 }
     

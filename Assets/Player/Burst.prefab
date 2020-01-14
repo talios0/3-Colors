@@ -229,8 +229,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7392f4ca81e57646934f0b026ae54df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DecalManager: {fileID: 0}
+  burstProperties: {fileID: 0}
+  color: 0
   splatter: {fileID: 8893085091102988020, guid: abdeb8da0df062e46818d2783b5c1306,
     type: 3}
   size: 100
   points: 0
   smoothing: 0
+  baseSprite: {fileID: 21300000, guid: a0bf79e8bb5dc194bb68bf317003d25e, type: 3}

@@ -56,6 +56,8 @@ public class Attack : MonoBehaviour
         firedShot.GetComponent<Explode>().burstProperties = burstTypes[burstColor];
         firedShot.transform.position = transform.position;
 
+        firedShot.tag = ColorSelector.GetColor().ToString();
+
         // Color changes
         Color color = new Color();
         Color highlightColor = new Color();
@@ -69,6 +71,7 @@ public class Attack : MonoBehaviour
         physMat.bounciness = burstTypes[burstColor].bounciness;
         physMat.friction = burstTypes[burstColor].friction;
         firedShot.GetComponent<Rigidbody2D>().sharedMaterial = physMat;
+        firedShot.GetComponent<Rigidbody2D>().drag = burstTypes[burstColor].drag;
 
         firedShot.transform.localScale = new Vector2(burstTypes[burstColor].size,burstTypes[burstColor].size);
 

@@ -7,7 +7,11 @@ public class DecalManager : MonoBehaviour
     public int maxDecals;
 
     void FixedUpdate() {
-        if ()
+        int childCount = transform.childCount;
+        while (childCount > maxDecals) {
+            Destroy(transform.GetChild(0).gameObject);
+            childCount--;
+        }
     }
 
 
