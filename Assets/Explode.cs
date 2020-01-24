@@ -40,7 +40,7 @@ public class Explode : MonoBehaviour
         if (other.transform.gameObject.layer != LayerMask.NameToLayer("Default")) return;
 
         if (burstProperties.sizeOverVelocity) {
-            if (Physics2D.Raycast(transform.position, Vector2.down).transform != other.transform) {
+            if (Physics2D.Raycast(transform.position, Vector2.down, 1f, 1 << LayerMask.NameToLayer("Default")).transform != other.transform) {
                 Burst(other);
                 RemoveFromScene();
                 return;
@@ -137,9 +137,6 @@ public class Explode : MonoBehaviour
 
         if (burstProperties.sizeOverVelocity) {
             if (LineSprite != default(GameObject) && (To360(GetSlopeAngle()) < Mathf.Abs(LineSprite.transform.eulerAngles.z) - 5 || To360(GetSlopeAngle())> Mathf.Abs(LineSprite.transform.eulerAngles.z) + 5)) {
-                Debug.Log(Mathf.Abs(GetSlopeAngle()) + " ANGLE: " + (Mathf.Abs(LineSprite.transform.eulerAngles.z) - 5));
-                Debug.Log("ANGLE 2: " + (Mathf.Abs(LineSprite.transform.eulerAngles.z) + 5));
-                Debug.Log("----");
                 NewLine();
             } 
             float newSize = Mathf.Sqrt(Mathf.Pow(rb.velocity.x,2) + Mathf.Pow(rb.velocity.y,2)) / maxSpeed;
