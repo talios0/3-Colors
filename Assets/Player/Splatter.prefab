@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8893085091102988022}
   - component: {fileID: 8893085091102988023}
   - component: {fileID: -6649084879820344904}
+  - component: {fileID: 5211117691091447315}
   m_Layer: 14
   m_Name: Splatter
   m_TagString: Untagged
@@ -107,3 +108,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 9.15, y: 5.77}
   m_EdgeRadius: 0
+--- !u!114 &5211117691091447315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8893085091102988020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba0adee89233b2341b0bf9a07dc6271e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  properties: {fileID: 0}
