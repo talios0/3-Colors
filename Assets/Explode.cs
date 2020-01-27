@@ -50,8 +50,6 @@ public class Explode : MonoBehaviour
             if (previousCollision != null && other.gameObject.GetInstanceID() == previousCollision.gameObject.GetInstanceID()) { OnCollisionStay2D(other);return; }
             previousCollision = other;
             if (bounces >= burstProperties.bounces) {
-                Debug.Log(angle);
-                Debug.Log(GetSlopeAngle());
                 if (Mathf.Abs(GetSlopeAngle() - angle) > maxAngle) {
                     Burst(other);
                     RemoveFromScene();
