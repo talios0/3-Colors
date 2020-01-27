@@ -15,8 +15,9 @@ public class Explode : MonoBehaviour
     public int smoothing;
     public Sprite baseSprite;
 
-    private int bounces;
+    public float maxAngle;
 
+    private int bounces;
 
     private Rigidbody2D rb;
     private List<Vector3> verticies;
@@ -25,6 +26,7 @@ public class Explode : MonoBehaviour
     private GameObject LineSprite;
     private bool airborne;
 
+    private float angle;
     // COLOR
     private Color unityColor;
 
@@ -48,24 +50,33 @@ public class Explode : MonoBehaviour
             if (previousCollision != null && other.gameObject.GetInstanceID() == previousCollision.gameObject.GetInstanceID()) { OnCollisionStay2D(other);return; }
             previousCollision = other;
             if (bounces >= burstProperties.bounces) {
-                RemoveFromScene();
+                Debug.Log(angle);
+                Debug.Log(GetSlopeAngle());
+                if (Mathf.Abs(GetSlopeAngle() - angle) > maxAngle) {
+                    Burst(other);
+                    RemoveFromScene();
+                    return;
+                }
+                NewLine(); return; 
             } else {
-                NewLine();
+                if (LineSprite == default(GameObject)) NewLine();
             }
             if (airborne) { bounces++; airborne = false; }
+            angle = GetSlopeAngle();
             return;
         }
         Burst(other);
         if (bounces >= burstProperties.bounces) {
+            if (burstProperties.sizeOverVelocity) Burst(other);
             RemoveFromScene();
         }
 
-        bounces++;
+        if (burstProperties.sizeOverVelocity && !airborne) bounces++;
+        else if (!burstProperties.sizeOverVelocity) bounces++;
     }
 
     private void OnTriggerExit2D(Collider2D other) {
         RaycastHit2D ray_down = Physics2D.Raycast(transform.position, Vector2.down, 0.5f, 1 << LayerMask.NameToLayer("Default"));
-        Debug.Log(LayerMask.LayerToName(ray_down.transform.gameObject.layer));
         if (ray_down != default(RaycastHit2D))
             airborne = false;
         else airborne = true;
@@ -98,6 +109,7 @@ public class Explode : MonoBehaviour
     }
 
     private void NewLine() {
+        if (Physics2D.Raycast(transform.position, Vector2.down, 1f, 1 << LayerMask.NameToLayer("Effect"))) LineSprite = null;
         verticies = new List<Vector3>();
         LineSprite = new GameObject();
         LineSprite.AddComponent<SpriteRenderer>();
@@ -119,6 +131,7 @@ public class Explode : MonoBehaviour
     }
 
     private void ContinueLine() {
+        if (LineSprite == null) return;
         if (rb.velocity.magnitude < 0.25f) { Destroy(gameObject); return; }
         
         verticies.Add(new Vector3(transform.position.x, transform.position.y - transform.localScale.y/2, -0.25f));

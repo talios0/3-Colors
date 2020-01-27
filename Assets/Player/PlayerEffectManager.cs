@@ -22,10 +22,11 @@ public GameObject player;
                     player.GetComponent<Movement>().speed = player.GetComponent<Movement>().speed * 5;
                     interacting = Colors.ORANGE;
             } 
+            if (effect_down.transform.GetComponent<EffectProperty>().properties.color != Colors.ORANGE && interacting == Colors.ORANGE) {
+                player.GetComponent<Movement>().speed = player.GetComponent<Movement>().speed / 1.25f; interacting = Colors.NONE;
+            } 
         }
-        if (effect_down.transform.GetComponent<EffectProperty>().properties.color != Colors.ORANGE && interacting == Colors.ORANGE) {
-            player.GetComponent<Movement>().speed = player.GetComponent<Movement>().speed / 1.25f; interacting = Colors.NONE;
-        } 
+        
     }
 
 }
