@@ -62,15 +62,13 @@ public class Hover : MonoBehaviour
         {
             gapDetected = true;
             if (gapHover != GapHoverState.ENDED) gapHover = GapHoverState.HOVER;
-            groundY = lastRayHit.transform.position.y + lastRayHit.transform.localScale.y / 2;
-            lastRelativeGroundY = transform.position.y - transform.localScale.y / 2 - groundY;
+            lastRelativeGroundY = lastRayHit.distance;
             return;
         }
         gapDetected = false;
         gapHover = GapHoverState.NONE;
         time = 0;
-        groundY = rayHit.transform.position.y + rayHit.transform.localScale.y / 2;
-        relativeGroundY = transform.position.y - transform.localScale.y / 2 - groundY;
+        relativeGroundY = rayHit.distance;
         lastRelativeGroundY = relativeGroundY;
         if (rayHit.transform.gameObject.layer != LayerMask.NameToLayer("Dynamic")) lastRayHit = rayHit;
     }

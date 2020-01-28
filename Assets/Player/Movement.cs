@@ -50,12 +50,19 @@ public class Movement : MonoBehaviour
         if (input.x == 1) {
             GetComponent<SpriteRenderer>().flipX = false;
         }
-        if (input.x != 0) rb.AddForce(input.x * speed * Vector2.right);
+        RaycastHit2D ground = GetGround();
+        Vector2 dir = Vector2.right;
+        if (ground != default(RaycastHit2D)) {
+            float angle = Transformations.To360(Transformations.GetSlopeAngle(transform, rb, new Vector3(0, -0.6f, 0))) * Mathf.Deg2Rad;
+            dir = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+        }
+
+        if (input.x != 0) rb.AddForce(input.x * speed * dir);
         else if (rb.velocity.x != 0)
         {
             bool xDirection = rb.velocity.x > 0;
-            if (xDirection) rb.AddForce(-speed / 4 * Vector2.right);
-            else rb.AddForce(speed / 4 * Vector2.right);
+            if (xDirection) rb.AddForce(-speed / 4 * dir);
+            else rb.AddForce(speed / 4 * dir);
         }
     }
 
@@ -77,7 +84,7 @@ public class Movement : MonoBehaviour
         }
 
         if (input.y == 0 || jumpState == JumpState.ENDED) return;
-        if ((transform.position.y + transform.localScale.y / 2) - (rayHit.transform.position.y + rayHit.transform.localScale.y / 2) > distanceToStartJump) return;
+        if (rayHit.distance > distanceToStartJump) return;
 
         jumpState = JumpState.INITIATED;
     }
@@ -101,7 +108,7 @@ public class Movement : MonoBehaviour
     }
 
     public RaycastHit2D GetGround() {
-        RaycastHit2D[] rayHits = Physics2D.RaycastAll(new Vector3(transform.position.x, transform.position.y + transform.localScale.y / 2, transform.position.z), Vector2.down, 5f);
+        RaycastHit2D[] rayHits = Physics2D.RaycastAll(new Vector3(transform.position.x, transform.position.y + transform.localScale.y / 2, transform.position.z), Vector2.down, 5f, 1 << LayerMask.NameToLayer("Default"));
         RaycastHit2D ground = new RaycastHit2D();
         foreach (RaycastHit2D obj in rayHits) {
             if (Physics2D.GetIgnoreLayerCollision(gameObject.layer, obj.transform.gameObject.layer)) continue;
@@ -109,7 +116,7 @@ public class Movement : MonoBehaviour
                 ground = obj;
                 continue;
             }
-            if (ground.transform.position.y + ground.transform.localScale.y / 2 < obj.transform.position.y + obj.transform.localScale.y / 2) ground = obj;
+            if (ground.distance < obj.transform.position.y + obj.transform.localScale.y / 2) ground = obj;
         }
 
         return ground;

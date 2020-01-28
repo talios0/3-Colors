@@ -50,7 +50,7 @@ public class Explode : MonoBehaviour
             if (previousCollision != null && other.gameObject.GetInstanceID() == previousCollision.gameObject.GetInstanceID()) { OnCollisionStay2D(other);return; }
             previousCollision = other;
             if (bounces >= burstProperties.bounces) {
-                if (Mathf.Abs(GetSlopeAngle() - angle) > maxAngle) {
+                if (Mathf.Abs(Transformations.GetSlopeAngle(transform, rb) - angle) > maxAngle) {
                     Burst(other);
                     RemoveFromScene();
                     return;
@@ -60,7 +60,7 @@ public class Explode : MonoBehaviour
                 if (LineSprite == default(GameObject)) NewLine();
             }
             if (airborne) { bounces++; airborne = false; }
-            angle = GetSlopeAngle();
+            angle = Transformations.GetSlopeAngle(transform, rb);
             return;
         }
         Burst(other);
@@ -147,7 +147,7 @@ public class Explode : MonoBehaviour
         float maxSpeed = 30;
 
         if (burstProperties.sizeOverVelocity) {
-            if (LineSprite != default(GameObject) && (To360(GetSlopeAngle()) < Mathf.Abs(LineSprite.transform.eulerAngles.z) - 5 || To360(GetSlopeAngle())> Mathf.Abs(LineSprite.transform.eulerAngles.z) + 5)) {
+            if (LineSprite != default(GameObject) && (Transformations.To360(Transformations.GetSlopeAngle(transform, rb)) < Mathf.Abs(LineSprite.transform.eulerAngles.z) - 5 || Transformations.To360(Transformations.GetSlopeAngle(transform, rb))> Mathf.Abs(LineSprite.transform.eulerAngles.z) + 5)) {
                 NewLine();
             } 
             float newSize = Mathf.Sqrt(Mathf.Pow(rb.velocity.x,2) + Mathf.Pow(rb.velocity.y,2)) / maxSpeed;
@@ -163,45 +163,11 @@ public class Explode : MonoBehaviour
         }
     }
 
-    private float GetSlopeAngle() {
-        RaycastHit2D[] ray_down = Physics2D.RaycastAll(transform.position,Vector2.down, 1f);
-        RaycastHit2D[] ray_dir;
-
-        int modifier_vertical = 1;
-        int modifier_horizontal = 1;
-
-        if (rb.velocity.x > 0 && rb.velocity.y < 0 || rb.velocity.x < 0 && rb.velocity.y > 0) {
-            ray_dir = Physics2D.RaycastAll(transform.position, Vector2.left, 1f);
-            modifier_horizontal = -1;
-        } else {
-            ray_dir = Physics2D.RaycastAll(transform.position, Vector2.right, 1f);
-        }
-        
-        if (ray_dir.Length == 0 || ray_down.Length == 0) return 0f;
-        RaycastHit2D usableRay_horizontal = new RaycastHit2D();
-        RaycastHit2D usableRay_vertical = new RaycastHit2D();
-        foreach (RaycastHit2D r in ray_dir) {
-            if (r.transform.gameObject.layer == LayerMask.NameToLayer("Default")) {usableRay_horizontal = r; break; }
-        }
-         foreach (RaycastHit2D r in ray_down) {
-            if (r.transform.gameObject.layer == LayerMask.NameToLayer("Default")) {usableRay_vertical = r; break; }
-        }
-
-        if (usableRay_horizontal == default(RaycastHit2D) || usableRay_vertical == default(RaycastHit2D)) return 0f;
-
-//        Debug.Log(Mathf.Atan2(usableRay_vertical.distance, usableRay_horizontal.distance) * Mathf.Rad2Deg);
-
-        // /Debug.Log(usableRay_horizontal.distance);
-        return Mathf.Round(Mathf.Atan2(usableRay_vertical.distance, usableRay_horizontal.distance) * Mathf.Rad2Deg) * modifier_horizontal;
-    }
+    
 
     private void SetSlopeAngle() {
-        LineSprite.transform.eulerAngles = new Vector3(0,0, GetSlopeAngle());
+        LineSprite.transform.eulerAngles = new Vector3(0,0, Transformations.GetSlopeAngle(transform, rb));
     }
 
-    private float To360(float angle) {
-        if (angle > 0) return angle;
-        return angle + 360;
-    }
 
 }
