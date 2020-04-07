@@ -21,3 +21,14 @@ MonoBehaviour:
   maxSplatSize: 0.2
   bounciness: 0.9
   friction: 0
+  drag: 0
+  sizeOverVelocity: 0
+  splatter: {fileID: 21300000, guid: 6bf07e054272c854cb7a3fc9fb9f2612, type: 3}
+  line: {fileID: 0}
+  createLine: 0
+  angleRange: 0
+  distanceFromGround: 0.02
+  interactable:
+    serializedVersion: 2
+    m_Bits: 1
+  showRays: 0

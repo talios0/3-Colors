@@ -22,4 +22,14 @@ MonoBehaviour:
   bounciness: 0
   friction: 0.4
   drag: 1.25
-  sizeOverVelocity: 1
+  sizeOverVelocity: 0
+  splatter: {fileID: 21300000, guid: 6bf07e054272c854cb7a3fc9fb9f2612, type: 3}
+  line: {fileID: 3286163911610860551, guid: 3a2325260d426e04b969c3265eb083c7, type: 3}
+  createLine: 1
+  angleRange: 0.5
+  distanceFromGround: 0.045
+  distanceToLeaveGround: 0.25
+  interactable:
+    serializedVersion: 2
+    m_Bits: 1
+  showRays: 1
